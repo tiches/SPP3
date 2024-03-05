@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPP3", "SPP3\SPP3.csproj", "{F51EBEDF-BC98-462D-B7BC-78AB7C66776E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingAppLibrary", "DatingAppLibrary\DatingAppLibrary.csproj", "{F4ECC2DD-C87F-4BE0-BEC3-3457C3BD2B4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{37EF6EA1-8504-4650-B7BB-5D945617701C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F51EBEDF-BC98-462D-B7BC-78AB7C66776E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51EBEDF-BC98-462D-B7BC-78AB7C66776E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51EBEDF-BC98-462D-B7BC-78AB7C66776E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51EBEDF-BC98-462D-B7BC-78AB7C66776E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4ECC2DD-C87F-4BE0-BEC3-3457C3BD2B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4ECC2DD-C87F-4BE0-BEC3-3457C3BD2B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4ECC2DD-C87F-4BE0-BEC3-3457C3BD2B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4ECC2DD-C87F-4BE0-BEC3-3457C3BD2B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDF8E443-700D-4AE8-BCDB-CA09FC682710}
+	EndGlobalSection
+EndGlobal
