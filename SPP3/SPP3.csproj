@@ -84,6 +84,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="CreateLogon.aspx" />
+    <Content Include="DatingAppHome.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -99,6 +101,20 @@
     </Compile>
     <Compile Include="CreateLogon.aspx.designer.cs">
       <DependentUpon>CreateLogon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DatingAppHome.aspx.cs">
+      <DependentUpon>DatingAppHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DatingAppHome.aspx.designer.cs">
+      <DependentUpon>DatingAppHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,6 +148,16 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatingAppLibrary\DatingAppLibrary.csproj">
+      <Project>{f4ecc2dd-c87f-4be0-bec3-3457c3bd2b4c}</Project>
+      <Name>DatingAppLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{37ef6ea1-8504-4650-b7bb-5d945617701c}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

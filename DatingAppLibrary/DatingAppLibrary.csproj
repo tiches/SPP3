@@ -51,5 +51,11 @@
     <Compile Include="UserAccount.cs" />
     <Compile Include="UserProfile.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{37EF6EA1-8504-4650-B7BB-5D945617701C}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
