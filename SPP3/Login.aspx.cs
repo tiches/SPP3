@@ -29,8 +29,21 @@ namespace SPP3
            
            userid= dbProcess.UserLogin(checkUser);
 
-            lblErrorMsg.Text = userid.ToString();
-            Session["UserID"] = userid;
+           // lblErrorMsg.Text = userid.ToString();
+
+            if (userid > 0)
+            {
+
+
+                Session["UserID"] = userid;
+                Response.Redirect("DatingAppHome.aspx");
+
+            }
+            else
+            {
+                lblErrorMsg.Text = "Login information incorrect";
+                lblErrorMsg.Visible = true;
+            }
         }
     }
 }
