@@ -28,9 +28,22 @@
     <label for="txtProfilePhoto">Profile Photo URL:</label>
     <asp:TextBox ID="txtProfilePhotoUrl" runat="server" CssClass="form-control"></asp:TextBox>
 </div>
+                           <div class="form-group">
+    <label for="txtName">Name:</label>
+    <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
+</div>
                <div class="form-group">
     <label for="txtAddress">Address:</label>
     <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control"></asp:TextBox>
+</div>
+
+             <div class="form-group">
+    <label for="txtCity">City:</label>
+    <asp:TextBox ID="txtCity" runat="server" CssClass="form-control"></asp:TextBox>
+</div>
+             <div class="form-group">
+    <label for="txtState">State:</label>
+    <asp:TextBox ID="txtState" runat="server" CssClass="form-control"></asp:TextBox>
 </div>
 <div class="form-group">
     <label for="txtPhone">Phone:</label>
@@ -67,8 +80,12 @@
     <asp:TextBox ID="txtInterests" runat="server" CssClass="form-control"></asp:TextBox>
 </div>
 <div class="form-group">
-    <label for="txtLikesDislikes">Likes/Dislikes:</label>
-    <asp:TextBox ID="txtLikesDislikes" runat="server" CssClass="form-control"></asp:TextBox>
+    <label for="txtLikes">Likes:</label>
+    <asp:TextBox ID="txtLikes" runat="server" CssClass="form-control"></asp:TextBox>
+</div>
+            <div class="form-group">
+    <label for="txtDisLikes">Dislikes:</label>
+    <asp:TextBox ID="txtDislikes" runat="server" CssClass="form-control"></asp:TextBox>
 </div>
 <div class="form-group">
     <label for="txtFavoriteRestaurants">Favorite Restaurants:</label>

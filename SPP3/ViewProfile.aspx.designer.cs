@@ -11,7 +11,7 @@ namespace SPP3
 {
 
 
-    public partial class CreateProfile
+    public partial class ViewProfile
     {
 
         /// <summary>
@@ -24,192 +24,174 @@ namespace SPP3
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// txtProfilePhotoUrl control.
+        /// divProfilePhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProfilePhotoUrl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProfilePhoto;
 
         /// <summary>
-        /// txtName control.
+        /// lblName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblName;
 
         /// <summary>
-        /// txtAddress control.
+        /// lblAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblAge;
 
         /// <summary>
-        /// txtCity control.
+        /// lblDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCity;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDescription;
 
         /// <summary>
-        /// txtState control.
+        /// lblCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtState;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCity;
 
         /// <summary>
-        /// txtPhone control.
+        /// lblState control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblState;
 
         /// <summary>
-        /// txtOccupation control.
+        /// lblHeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOccupation;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblHeight;
 
         /// <summary>
-        /// txtAge control.
+        /// lblWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAge;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblWeight;
 
         /// <summary>
-        /// txtHeight control.
+        /// lblInterests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHeight;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblInterests;
 
         /// <summary>
-        /// txtWeight control.
+        /// lblLikes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtWeight;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblLikes;
 
         /// <summary>
-        /// ddlCommitmentType control.
+        /// lblDislikes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCommitmentType;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDislikes;
 
         /// <summary>
-        /// txtInterests control.
+        /// lblFavRestaurants control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInterests;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFavRestaurants;
 
         /// <summary>
-        /// txtLikes control.
+        /// lblFavMovies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLikes;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFavMovies;
 
         /// <summary>
-        /// txtDislikes control.
+        /// lblFavQuotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDislikes;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFavQuotes;
 
         /// <summary>
-        /// txtFavoriteRestaurants control.
+        /// lblGoals control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFavoriteRestaurants;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblGoals;
 
         /// <summary>
-        /// txtFavoriteMovies control.
+        /// lblCommitmentType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFavoriteMovies;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCommitmentType;
 
         /// <summary>
-        /// txtFavoriteBooks control.
+        /// btnSendLike control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFavoriteBooks;
+        protected global::System.Web.UI.WebControls.Button btnSendLike;
 
         /// <summary>
-        /// txtFavoriteQuotes control.
+        /// lblLikeSent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFavoriteQuotes;
+        protected global::System.Web.UI.WebControls.Label lblLikeSent;
 
         /// <summary>
-        /// txtGoals control.
+        /// btnBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGoals;
-
-        /// <summary>
-        /// txtDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
-
-        /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.Button btnBack;
     }
 }

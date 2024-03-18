@@ -59,7 +59,10 @@ namespace SPP3
 
             //Process the form data when the submit button is clicked
             userprof.ProfilePhotoURL = txtProfilePhotoUrl.Text;
+            userprof.Name = txtName.Text;
             userprof.Address = txtAddress.Text;
+            userprof.City = txtCity.Text;
+            userprof.State = txtState.Text;
             userprof.Phone = txtPhone.Text;
             userprof.Occupation = txtOccupation.Text;
             userprof.Age = Convert.ToInt32(txtAge.Text);
@@ -67,7 +70,8 @@ namespace SPP3
             userprof.Weight = Convert.ToInt32(txtWeight.Text);
             userprof.CommitmentType = ddlCommitmentType.SelectedValue;
             userprof.Interests = txtInterests.Text;
-            userprof.LikesDislikes = txtLikesDislikes.Text;
+            userprof.Likes = txtLikes.Text;
+            userprof.Dislikes = txtDislikes.Text;
             userprof.FavoriteRestaurants = txtFavoriteRestaurants.Text;
             userprof.FavoriteMovies = txtFavoriteMovies.Text;
             userprof.FavoriteBooks = txtFavoriteBooks.Text;

@@ -152,7 +152,10 @@ namespace DatingAppLibrary
 
             objCommand.Parameters.AddWithValue("@UserID", userID);
             objCommand.Parameters.AddWithValue("@ProfilePhotoURL", userProfile.ProfilePhotoURL);
+            objCommand.Parameters.AddWithValue("@Name", userProfile.Name);
             objCommand.Parameters.AddWithValue("@Address", userProfile.Address);
+            objCommand.Parameters.AddWithValue("@City", userProfile.City);
+            objCommand.Parameters.AddWithValue("@State", userProfile.State);
             objCommand.Parameters.AddWithValue("@Phone", userProfile.Phone);
             objCommand.Parameters.AddWithValue("@Occupation", userProfile.Occupation);
             objCommand.Parameters.AddWithValue("@Age", userProfile.Age);
@@ -161,7 +164,8 @@ namespace DatingAppLibrary
             objCommand.Parameters.AddWithValue("@Weight", userProfile.Weight); // Add Weight parameter
             objCommand.Parameters.AddWithValue("@CommitmentType", userProfile.CommitmentType); // Add CommitmentType parameter
             objCommand.Parameters.AddWithValue("@Interests", userProfile.Interests);
-            objCommand.Parameters.AddWithValue("@LikesDislikes", userProfile.LikesDislikes);
+            objCommand.Parameters.AddWithValue("@Likes", userProfile.Likes);
+            objCommand.Parameters.AddWithValue("@Dislikes", userProfile.Dislikes);
             objCommand.Parameters.AddWithValue("@FavoriteRestaurants", userProfile.FavoriteRestaurants);
             objCommand.Parameters.AddWithValue("@FavoriteMovies", userProfile.FavoriteMovies);
             objCommand.Parameters.AddWithValue("@FavoriteBooks", userProfile.FavoriteBooks);
@@ -180,6 +184,152 @@ namespace DatingAppLibrary
 
 
             return profileid;
+        }
+
+        public void toggleProfileStatus( int userID)
+        {
+            
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.CommandText = "ToggleProfileStatus";
+
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+
+        public bool getProfileStatus(int userID)
+        {
+            bool isActive = false;
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetProfileStatus";
+
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            SqlParameter returnParameter = new SqlParameter("@IsActive", SqlDbType.Bit);
+            returnParameter.Direction = ParameterDirection.Output;
+            objCommand.Parameters.Add(returnParameter);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+
+            // Retrieve the value of the output parameter
+            if (returnParameter.Value != DBNull.Value)
+            {
+                isActive = (bool)returnParameter.Value;
+            }
+
+            return isActive;
+        }
+        public List<UserProfile> GetActiveUserProfiles(int userID)
+        {
+            List<UserProfile> profiles = new List<UserProfile>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "SelectActiveUserProfiles";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    UserProfile userProfile = new UserProfile();
+
+                    // Populate the UserProfile object from the DataRow
+                    userProfile.UserID = (int)row["UserID"];
+                    userProfile.ProfilePhotoURL = row["ProfilePhotoURL"].ToString();
+                    userProfile.Name = row["Name"].ToString();
+                    userProfile.Address = row["Address"].ToString();
+                    userProfile.City = row["City"].ToString();
+                    userProfile.State = row["State"].ToString();
+                    userProfile.Phone = row["Phone"].ToString();
+                    userProfile.Occupation = row["Occupation"].ToString();
+                    userProfile.Age = (int)row["Age"];
+                    userProfile.Height = (int)row["Height"];
+                    userProfile.Weight = (int)row["Weight"];
+                    userProfile.CommitmentType = row["CommitmentType"].ToString();
+                    userProfile.Interests = row["Interests"].ToString();
+                    userProfile.Likes = row["Likes"].ToString();
+                    userProfile.Dislikes = row["Dislikes"].ToString();
+                    userProfile.FavoriteRestaurants = row["FavRestaurants"].ToString();
+                    userProfile.FavoriteMovies = row["FavMovies"].ToString();
+                    userProfile.FavoriteBooks = row["FavBooks"].ToString();
+                    userProfile.FavoriteQuotes = row["FavQuotes"].ToString();
+                    userProfile.Goals = row["Goals"].ToString();
+                    userProfile.Description = row["Description"].ToString();
+
+                    profiles.Add(userProfile);
+                }
+            }
+
+
+            return profiles;
+
+        }
+
+        public UserProfile GetUserProfileByID (int userID)
+        {
+            UserProfile userProfile = new UserProfile();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetUserProfileByID";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            // Get the DataSet using the DBConnect method
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            // Check if DataSet contains any tables and rows
+            if (myDS.Tables.Count > 0 && myDS.Tables[0].Rows.Count > 0)
+            {
+                // Get the first row from the DataSet
+                DataRow row = myDS.Tables[0].Rows[0];
+
+                // Populate the UserProfile object from the DataRow
+                userProfile.UserID = Convert.ToInt32(row["UserID"]);
+                userProfile.ProfilePhotoURL = Convert.ToString(row["ProfilePhotoURL"]);
+                userProfile.Name = Convert.ToString(row["Name"]);
+                userProfile.Address = Convert.ToString(row["Address"]);
+                userProfile.City = Convert.ToString(row["City"]);
+                userProfile.State = Convert.ToString(row["State"]);
+                userProfile.Phone = Convert.ToString(row["Phone"]);
+                userProfile.Occupation = Convert.ToString(row["Occupation"]);
+                userProfile.Age = Convert.ToInt32(row["Age"]);
+                userProfile.Height = Convert.ToInt32(row["Height"]);
+                userProfile.Weight = Convert.ToInt32(row["Weight"]);
+                userProfile.CommitmentType = Convert.ToString(row["CommitmentType"]);
+                userProfile.Interests = Convert.ToString(row["Interests"]);
+                userProfile.Likes = Convert.ToString(row["Likes"]);
+                userProfile.Dislikes = Convert.ToString(row["Dislikes"]);
+                userProfile.FavoriteRestaurants = Convert.ToString(row["FavRestaurants"]);
+                userProfile.FavoriteMovies = Convert.ToString(row["FavMovies"]);
+                userProfile.FavoriteBooks = Convert.ToString(row["FavBooks"]);
+                userProfile.FavoriteQuotes = Convert.ToString(row["FavQuotes"]);
+                userProfile.Goals = Convert.ToString(row["Goals"]);
+                userProfile.Description = Convert.ToString(row["Description"]);
+            }
+
+            // Return the UserProfile object
+            return userProfile;
+
+           
+
+            
         }
     }
 }

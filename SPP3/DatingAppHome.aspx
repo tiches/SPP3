@@ -33,8 +33,8 @@
             <div class="col-md-6">
                 <h2>Navigation</h2>
                 <ul class="list-group">
-                    <li class="list-group-item"><a href="createProfile.aspx">Create Public Profile</a></li>
-                    <li class="list-group-item"><a href="browse-users.aspx">Browse Users</a></li>
+                    <li class="list-group-item"><a href="ManageProfile.aspx">Manage Public Profile</a></li>
+                    <li class="list-group-item"><a href="BrowseProfiles.aspx">Browse Users</a></li>
                      <li class="list-group-item"><a href="ViewLikes.aspx">View Likes</a></li>
                     <li class="list-group-item"><a href="view-matches.aspx">View Matches</a></li>
                     <li class="list-group-item"><a href="view-dates.aspx">View Dates</a></li>

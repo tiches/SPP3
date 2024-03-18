@@ -10,8 +10,10 @@ namespace SPP3
 {
     public partial class DatingAppHome : System.Web.UI.Page
     {
+        int userid;
         protected void Page_Load(object sender, EventArgs e)
         {
+            userid = (int)Session["UserID"];
             UserAccount user = new UserAccount();
 
             int userId = Convert.ToInt32(Session["UserID"]);

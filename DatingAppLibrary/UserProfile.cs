@@ -10,7 +10,11 @@ namespace DatingAppLibrary
     {
         public int ProfileID { get; set; }
         public int UserID { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+
         public string Phone { get; set; }
         public string Occupation { get; set; }
         public int Age { get; set; }
@@ -18,7 +22,8 @@ namespace DatingAppLibrary
         public double Weight { get; set; }
         public string ProfilePhotoURL { get; set; }
         public string Interests { get; set; }
-        public string LikesDislikes { get; set; }
+        public string Likes { get; set; }
+        public string Dislikes { get; set; }
         public string FavoriteRestaurants { get; set; }
         public string FavoriteMovies { get; set; }
         public string FavoriteBooks { get; set; }
