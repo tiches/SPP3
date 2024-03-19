@@ -28,7 +28,7 @@ namespace SPP3
 
         protected void btnEditProfile_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("EditProfile.aspx");
         }
 
         protected void btnToggleStatus_Click(object sender, EventArgs e)

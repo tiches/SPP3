@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dating App - Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Your custom CSS for dating app theme -->
+   
     <style>
-        /* Add your custom CSS for dating app theme here */
+       
         body {
             background-color: #f8f9fa; /* Light gray background */
         }
@@ -22,11 +22,29 @@
         .container {
             margin-top: 50px;
         }
+         .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #fff; /* White background for button */
+            color: #ff4d4d; /* Red color for button text */
+            border: 2px solid #ff4d4d; /* Red border for button */
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .logout-btn:hover {
+            background-color: #ff4d4d; /* Red background on hover */
+            color: #fff; /* White text on hover */
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1><asp:Label ID="lblWelcomeMessage" runat="server" /></h1>
+        <h1>Welcome to the Dating App!</h1>
+         <form id="formLogout" runat="server">
+         <asp:Button ID="btnLogout" runat="server" Text="Log Out" OnClick="btnLogout_Click" CssClass="btn btn-danger" />
+             </form>
     </div>
     <div class="container">
         <div class="row">
@@ -35,12 +53,12 @@
                 <ul class="list-group">
                     <li class="list-group-item"><a href="ManageProfile.aspx">Manage Public Profile</a></li>
                     <li class="list-group-item"><a href="BrowseProfiles.aspx">Browse Users</a></li>
-                     <li class="list-group-item"><a href="ViewLikes.aspx">View Likes</a></li>
-                    <li class="list-group-item"><a href="view-matches.aspx">View Matches</a></li>
+                     <li class="list-group-item"><a href="ManageLikes.aspx">View Likes</a></li>
+                    <li class="list-group-item"><a href="ManageMatches.aspx">View Matches</a></li>
                     <li class="list-group-item"><a href="view-dates.aspx">View Dates</a></li>
                 </ul>
             </div>
-            <!-- You can add more sections/columns here -->
+            
             <div class="col-md-6">
                 <h2>User Information</h2>
                 <p><strong>Username:</strong> <asp:Label ID="lblUsername" runat="server" /></p>

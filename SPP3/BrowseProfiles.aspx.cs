@@ -54,5 +54,40 @@ namespace SPP3
                 profileContainer.Controls.Add(card);
             }
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            int userID = (int)Session["UserID"];
+            List<UserProfile> profiles = null;
+
+            // Check which search criteria was selected and perform the search accordingly
+            if (ddlSearchCriteria.SelectedValue == "Age")
+            {
+                // Perform search by age
+                int age = Convert.ToInt32(txtSearch.Text);
+                profiles = dbProcess.SearchUserProfilesByAge(userID, age);
+            }
+            else if (ddlSearchCriteria.SelectedValue == "City")
+            {
+                // Perform search by city
+                string city = txtSearch.Text;
+                profiles = dbProcess.SearchUserProfilesByCity(userID, city);
+            }
+            else if (ddlSearchCriteria.SelectedValue == "Interests")
+            {
+                // Perform search by interests
+                string interests = txtSearch.Text;
+                profiles = dbProcess.SearchUserProfilesByInterests(userID, interests);
+            }
+            else if (ddlSearchCriteria.SelectedValue == "Name")
+            {
+                // Perform search by name
+                string name = txtSearch.Text;
+                profiles = dbProcess.SearchUserProfilesByName(userID, name);
+            }
+
+            // Display the search results
+            DisplayProfiles(profiles);
+        }
     }
 }

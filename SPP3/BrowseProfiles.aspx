@@ -28,9 +28,15 @@
                     <a href="DatingAppHome.aspx" class="btn btn-secondary">Back</a>
                 </div>
                 <div class="col text-right">
-                    <!-- Add your search links here -->
-                    <a href="#" class="mr-2">Search by Age</a>
-                    <a href="#">Search by Interest</a>
+                    <!-- search links here -->
+                   <asp:DropDownList ID="ddlSearchCriteria" runat="server" CssClass="mr-2">
+                        <asp:ListItem Value="Age">Search by Age</asp:ListItem>
+                        <asp:ListItem Value="City">Search by City</asp:ListItem>
+                        <asp:ListItem Value="Interests">Search by Interests</asp:ListItem>
+                        <asp:ListItem Value="Name">Search by Name</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control mr-2" />
+                    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
                 </div>
             </div>
 

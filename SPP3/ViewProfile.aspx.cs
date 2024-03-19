@@ -11,15 +11,25 @@ namespace SPP3
     public partial class ViewProfile : System.Web.UI.Page
     {
         DAProcessing dbProcess = new DAProcessing();
+        int userid;
+        int viewingUserID;
         protected void Page_Load(object sender, EventArgs e)
         {
+            userid = (int)Session["UserID"];
+            viewingUserID = Convert.ToInt32(Request.QueryString["UserID"]);
 
             if (!IsPostBack)
             {
+                // userid = (int)Session["UserID"];
+                
                 // Load the user profile
                 int userID = Convert.ToInt32(Request.QueryString["UserID"]);
+                //for likes purposes
+                
+
                 UserProfile userProfile = dbProcess.GetUserProfileByID(userID);
 
+                viewingUserID = userProfile.UserID;
                 // Set the profile photo
                 Image imgProfilePhoto = new Image();
                 imgProfilePhoto.ImageUrl = userProfile.ProfilePhotoURL;
@@ -43,7 +53,7 @@ namespace SPP3
                 lblGoals.InnerText = userProfile.Goals;
                 lblCommitmentType.InnerText = userProfile.CommitmentType;
                 
-                // Set other profile information as needed
+              
             }
 
 
@@ -51,7 +61,9 @@ namespace SPP3
 
         protected void btnSendLike_Click(object sender, EventArgs e)
         {
-
+            dbProcess.CreateLike(userid, viewingUserID);
+            lblLikeSent.Text = "Like has been sent!";
+            lblLikeSent.Visible = true;
         }
 
         protected void btnBack_Click(object sender, EventArgs e)

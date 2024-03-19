@@ -87,8 +87,13 @@
     <Content Include="CreateProfile.aspx" />
     <Content Include="CreateLogon.aspx" />
     <Content Include="DatingAppHome.aspx" />
+    <Content Include="DatingLandingPage.aspx" />
+    <Content Include="EditProfile.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="ManageLikes.aspx" />
+    <Content Include="ManageMatches.aspx" />
     <Content Include="ManageProfile.aspx" />
+    <Content Include="ReceivedLikes.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -100,6 +105,7 @@
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
+    <Content Include="SentLikes.aspx" />
     <Content Include="ViewProfile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -132,12 +138,40 @@
     <Compile Include="DatingAppHome.aspx.designer.cs">
       <DependentUpon>DatingAppHome.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DatingLandingPage.aspx.cs">
+      <DependentUpon>DatingLandingPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DatingLandingPage.aspx.designer.cs">
+      <DependentUpon>DatingLandingPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditProfile.aspx.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditProfile.aspx.designer.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageLikes.aspx.cs">
+      <DependentUpon>ManageLikes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageLikes.aspx.designer.cs">
+      <DependentUpon>ManageLikes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageMatches.aspx.cs">
+      <DependentUpon>ManageMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageMatches.aspx.designer.cs">
+      <DependentUpon>ManageMatches.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageProfile.aspx.cs">
       <DependentUpon>ManageProfile.aspx</DependentUpon>
@@ -147,6 +181,20 @@
       <DependentUpon>ManageProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceivedLikes.aspx.cs">
+      <DependentUpon>ReceivedLikes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceivedLikes.aspx.designer.cs">
+      <DependentUpon>ReceivedLikes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SentLikes.aspx.cs">
+      <DependentUpon>SentLikes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SentLikes.aspx.designer.cs">
+      <DependentUpon>SentLikes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewProfile.aspx.cs">
       <DependentUpon>ViewProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

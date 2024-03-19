@@ -25,12 +25,19 @@ namespace SPP3
             if (user != null)
             {
                 // Populate controls with user information
-                lblWelcomeMessage.Text = "Hello " + user.FullName + ", welcome to the dating app";
+                //lblWelcomeMessage.Text = "Hello " + user.FullName + ", welcome to the dating app";
                 lblUsername.Text = "Username: " + user.Username;
                 lblEmail.Text = "Email: " + user.Email;
-                // You can populate other controls as needed
+              
             }
 
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("DatingLandingPage.aspx");
         }
     }
 }

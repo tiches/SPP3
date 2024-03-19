@@ -48,7 +48,7 @@ namespace DatingAppLibrary
 
             return userid;
         }
-        public int UserLogin (UserAccount user)
+        public int UserLogin(UserAccount user)
         {
             int userid = -1;
 
@@ -93,7 +93,7 @@ namespace DatingAppLibrary
 
             //output the user account info
 
-        
+
 
             SqlParameter usernameParameter = new SqlParameter("@Username", SqlDbType.NVarChar, 50);
             usernameParameter.Direction = ParameterDirection.Output;
@@ -115,7 +115,7 @@ namespace DatingAppLibrary
             objDB.GetDataSetUsingCmdObj(objCommand);
 
             // Retrieve the output parameter values
-           
+
             string username = usernameParameter.Value.ToString();
             string password = passwordParameter.Value.ToString();
             string fullname = fullnameParameter.Value.ToString();
@@ -186,9 +186,48 @@ namespace DatingAppLibrary
             return profileid;
         }
 
-        public void toggleProfileStatus( int userID)
+
+        public void EditUserProfile(UserProfile userProfile, int userID)
         {
-            
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "EditUserProfile";
+
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+            objCommand.Parameters.AddWithValue("@ProfilePhotoURL", userProfile.ProfilePhotoURL);
+            objCommand.Parameters.AddWithValue("@Name", userProfile.Name);
+            objCommand.Parameters.AddWithValue("@Address", userProfile.Address);
+            objCommand.Parameters.AddWithValue("@City", userProfile.City);
+            objCommand.Parameters.AddWithValue("@State", userProfile.State);
+            objCommand.Parameters.AddWithValue("@Phone", userProfile.Phone);
+            objCommand.Parameters.AddWithValue("@Occupation", userProfile.Occupation);
+            objCommand.Parameters.AddWithValue("@Age", userProfile.Age);
+            objCommand.Parameters.AddWithValue("@Height", userProfile.Height);
+            objCommand.Parameters.AddWithValue("@Weight", userProfile.Weight);
+            objCommand.Parameters.AddWithValue("@CommitmentType", userProfile.CommitmentType);
+            objCommand.Parameters.AddWithValue("@Interests", userProfile.Interests);
+            objCommand.Parameters.AddWithValue("@Likes", userProfile.Likes);
+            objCommand.Parameters.AddWithValue("@Dislikes", userProfile.Dislikes);
+            objCommand.Parameters.AddWithValue("@FavoriteRestaurants", userProfile.FavoriteRestaurants);
+            objCommand.Parameters.AddWithValue("@FavoriteMovies", userProfile.FavoriteMovies);
+            objCommand.Parameters.AddWithValue("@FavoriteBooks", userProfile.FavoriteBooks);
+            objCommand.Parameters.AddWithValue("@FavoriteQuotes", userProfile.FavoriteQuotes);
+            objCommand.Parameters.AddWithValue("@Goals", userProfile.Goals);
+            objCommand.Parameters.AddWithValue("@Description", userProfile.Description);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+
+
+
+
+
+
+        public void toggleProfileStatus(int userID)
+        {
+
 
             DBConnect objDB = new DBConnect();
             SqlCommand objCommand = new SqlCommand();
@@ -280,7 +319,7 @@ namespace DatingAppLibrary
 
         }
 
-        public UserProfile GetUserProfileByID (int userID)
+        public UserProfile GetUserProfileByID(int userID)
         {
             UserProfile userProfile = new UserProfile();
 
@@ -327,9 +366,297 @@ namespace DatingAppLibrary
             // Return the UserProfile object
             return userProfile;
 
-           
 
-            
+
+
         }
+
+        public void CreateLike(int senderID, int receiverID)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.CommandText = "InsertLike";
+
+            objCommand.Parameters.AddWithValue("@SenderUserID", senderID);
+            objCommand.Parameters.AddWithValue("@ReceiverUserID", receiverID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+
+        public List<Like> GetSentLikes(int userID)
+        {
+            List<Like> SentLikes = new List<Like>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetSentLikes";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    Like newLike = new Like();
+
+                    // Populate the UserProfile object from the DataRow
+                    newLike.LikeID = (int)row["LikeID"];
+                    newLike.SenderUserID = (int)row["SenderUserID"];
+                    newLike.ReceiverUserID = (int)row["RecipientUserID"];
+                    newLike.Matched = row["Matched"].ToString();
+                    SentLikes.Add(newLike);
+                }
+            }
+                return SentLikes;
+            }
+
+        public List<Like> GetReceivedLikes(int userID)
+        {
+            List<Like> receivedLikes = new List<Like>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetReceivedLikes";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    Like newLike = new Like();
+
+                    // Populate the UserProfile object from the DataRow
+                    newLike.LikeID = (int)row["LikeID"];
+                    newLike.SenderUserID = (int)row["SenderUserID"];
+                    newLike.ReceiverUserID = (int)row["RecipientUserID"];
+                    newLike.Matched = row["Matched"].ToString();
+                    receivedLikes.Add(newLike);
+                }
+            }
+            return receivedLikes;
+        }
+
+
+        public void DeleteLikeByID(int likeID)
+        {
+            DBConnect objDB = new DBConnect();
+
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.CommandText = "DeleteLikeByID";
+
+            objCommand.Parameters.AddWithValue("@LikeID", likeID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+        public void MatchLike(int likeID)
+        {
+            DBConnect objDB = new DBConnect();
+
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+
+            objCommand.CommandText = "MatchLike";
+
+            objCommand.Parameters.AddWithValue("@LikeID", likeID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+        private UserProfile PopulateUserProfileFromDataRow(DataRow row)
+        {
+            UserProfile userProfile = new UserProfile();
+
+            // Populate the UserProfile object from the DataRow
+            userProfile.UserID = (int)row["UserID"];
+            userProfile.ProfilePhotoURL = row["ProfilePhotoURL"].ToString();
+            userProfile.Name = row["Name"].ToString();
+            userProfile.Address = row["Address"].ToString();
+            userProfile.City = row["City"].ToString();
+            userProfile.State = row["State"].ToString();
+            userProfile.Phone = row["Phone"].ToString();
+            userProfile.Occupation = row["Occupation"].ToString();
+            userProfile.Age = (int)row["Age"];
+            userProfile.Height = (int)row["Height"];
+            userProfile.Weight = (int)row["Weight"];
+            userProfile.CommitmentType = row["CommitmentType"].ToString();
+            userProfile.Interests = row["Interests"].ToString();
+            userProfile.Likes = row["Likes"].ToString();
+            userProfile.Dislikes = row["Dislikes"].ToString();
+            userProfile.FavoriteRestaurants = row["FavRestaurants"].ToString();
+            userProfile.FavoriteMovies = row["FavMovies"].ToString();
+            userProfile.FavoriteBooks = row["FavBooks"].ToString();
+            userProfile.FavoriteQuotes = row["FavQuotes"].ToString();
+            userProfile.Goals = row["Goals"].ToString();
+            userProfile.Description = row["Description"].ToString();
+
+            return userProfile;
+        }
+
+        public List<UserProfile> SearchUserProfilesByAge(int userID, int age)
+        {
+            List<UserProfile> profiles = new List<UserProfile>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "SearchUserProfilesByAge";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+            objCommand.Parameters.AddWithValue("@Age", age);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    // Populate the UserProfile object from the DataRow
+                    UserProfile userProfile = PopulateUserProfileFromDataRow(row);
+                    profiles.Add(userProfile);
+                }
+            }
+
+            return profiles;
+        }
+
+        public List<UserProfile> SearchUserProfilesByCity(int userID, string city)
+        {
+            List<UserProfile> profiles = new List<UserProfile>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "SearchUserProfilesByCity";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+            objCommand.Parameters.AddWithValue("@City", city);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    // Populate the UserProfile object from the DataRow
+                    UserProfile userProfile = PopulateUserProfileFromDataRow(row);
+                    profiles.Add(userProfile);
+                }
+            }
+
+            return profiles;
+        }
+
+        public List<UserProfile> SearchUserProfilesByName(int userID, string name)
+        {
+            List<UserProfile> profiles = new List<UserProfile>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "SearchUserProfilesByName";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+            objCommand.Parameters.AddWithValue("@Name", name);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    // Populate the UserProfile object from the DataRow
+                    UserProfile userProfile = PopulateUserProfileFromDataRow(row);
+                    profiles.Add(userProfile);
+                }
+            }
+
+            return profiles;
+        }
+
+        public List<UserProfile> SearchUserProfilesByInterests(int userID, string interests)
+        {
+            List<UserProfile> profiles = new List<UserProfile>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "SearchUserProfilesByInterests";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+            objCommand.Parameters.AddWithValue("@Interests", interests);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    // Populate the UserProfile object from the DataRow
+                    UserProfile userProfile = PopulateUserProfileFromDataRow(row);
+                    profiles.Add(userProfile);
+                }
+            }
+
+            return profiles;
+        }
+
+        public List<Match> GetMatchesByUserID(int userID)
+        {
+            List<Match> matches = new List<Match>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetMatchesByUserID";
+            objCommand.Parameters.AddWithValue("@UserID", userID);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    Match newMatch = new Match();
+
+                    // Populate the Match object from the DataRow
+                    newMatch.MatchID = (int)row["MatchID"];
+                    newMatch.User1ID = (int)row["User1ID"];
+                    newMatch.User2ID = (int)row["User2ID"];
+                   
+                    // Add other properties as needed
+
+                    matches.Add(newMatch);
+                }
+            }
+            return matches;
+        }
+
+        public void DeleteMatchByID(int matchID)
+        {
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "DeleteMatchByID";
+            objCommand.Parameters.AddWithValue("@MatchID", matchID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+
     }
-}
+    }
+

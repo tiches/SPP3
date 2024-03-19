@@ -15,13 +15,22 @@ namespace SPP3
     {
 
         /// <summary>
-        /// lblWelcomeMessage control.
+        /// formLogout control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWelcomeMessage;
+        protected global::System.Web.UI.HtmlControls.HtmlForm formLogout;
+
+        /// <summary>
+        /// btnLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
         /// lblUsername control.

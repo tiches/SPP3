@@ -11,6 +11,6 @@ namespace DatingAppLibrary
         public int LikeID { get; set; }
         public int SenderUserID { get; set; }
         public int ReceiverUserID { get; set; }
-        public bool Matched { get; set; }
+        public string Matched { get; set; }
     }
 }
