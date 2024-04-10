@@ -50,7 +50,12 @@ namespace SPP3
                 descriptionLabel.Text = otherUserProfile.Description;
                 matchDiv.Controls.Add(descriptionLabel);
 
-
+                Button requestDateButton = new Button();
+                requestDateButton.Text = "Request Date";
+                requestDateButton.CssClass = "btn btn-primary match-request-date-btn";
+                requestDateButton.CommandArgument = match.MatchID.ToString();
+                requestDateButton.Click += RequestDate_Click;
+                matchDiv.Controls.Add(requestDateButton);
 
 
                 Button deleteButton = new Button();
@@ -62,6 +67,16 @@ namespace SPP3
 
                 matchesContainer.Controls.Add(matchDiv);
             }
+        }
+
+        private void RequestDate_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PlanDate_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         protected void DeleteMatch_Click(object sender, EventArgs e)

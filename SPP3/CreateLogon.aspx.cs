@@ -37,7 +37,7 @@ namespace SPP3
             if (userid > 0)
             {
 
-                Response.Redirect("DatingAppHome.aspx");
+                Response.Redirect("CreateProfile.aspx");
             }
             else
             {

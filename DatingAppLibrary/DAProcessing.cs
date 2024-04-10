@@ -413,8 +413,8 @@ namespace DatingAppLibrary
                     SentLikes.Add(newLike);
                 }
             }
-                return SentLikes;
-            }
+            return SentLikes;
+        }
 
         public List<Like> GetReceivedLikes(int userID)
         {
@@ -636,7 +636,7 @@ namespace DatingAppLibrary
                     newMatch.MatchID = (int)row["MatchID"];
                     newMatch.User1ID = (int)row["User1ID"];
                     newMatch.User2ID = (int)row["User2ID"];
-                   
+
                     // Add other properties as needed
 
                     matches.Add(newMatch);
@@ -656,7 +656,28 @@ namespace DatingAppLibrary
 
             objDB.DoUpdateUsingCmdObj(objCommand);
         }
+        public Match GetMatchByID(int matchID)
+        {
+            Match match = new Match();
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
 
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "GetMatchByID";
+            objCommand.Parameters.AddWithValue("@MatchID", matchID);
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0 && myDS.Tables[0].Rows.Count > 0)
+            {
+                // Get the first row from the DataSet
+                DataRow row = myDS.Tables[0].Rows[0];
+                match.User1ID = (int)row["User1ID"];
+                match.User2ID = (int)row["User2ID"];
+                match.MatchID = (int)row["MatchID"];
+
+            }
+            return match;
+        }
     }
-    }
+}
 
