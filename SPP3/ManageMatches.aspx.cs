@@ -69,14 +69,18 @@ namespace SPP3
             }
         }
 
-        private void RequestDate_Click(object sender, EventArgs e)
+        protected void RequestDate_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //  throw new NotImplementedException();
+            Button requestDateButton = (Button)sender;
+            int matchID = Convert.ToInt32(requestDateButton.CommandArgument);
+
         }
 
-        private void PlanDate_Click(object sender, EventArgs e)
+        protected void PlanDate_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
+          //  Match match = dbProcess.GetMatchByID()
         }
 
         protected void DeleteMatch_Click(object sender, EventArgs e)

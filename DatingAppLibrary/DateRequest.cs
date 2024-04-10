@@ -9,6 +9,7 @@ namespace DatingAppLibrary
     public class DateRequest
     {
         public int RequestID { get; set; }
+        public int MatchID { get; set; }
         public int SenderUserID { get; set; }
         public int ReceiverUserID { get; set; }
         public string Status { get; set; }
