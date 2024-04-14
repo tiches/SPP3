@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32413.511
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPP3", "SPP3\SPP3.csproj", "{F51EBEDF-BC98-462D-B7BC-78AB7C66776E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatingAppLibrary", "DatingAppLibrary\DatingAppLibrary.csproj", "{F4ECC2DD-C87F-4BE0-BEC3-3457C3BD2B4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{37EF6EA1-8504-4650-B7BB-5D945617701C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4", "P4\P4.csproj", "{F3CD1BB5-0AC5-47FE-A292-7F278080B4F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37EF6EA1-8504-4650-B7BB-5D945617701C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3CD1BB5-0AC5-47FE-A292-7F278080B4F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CD1BB5-0AC5-47FE-A292-7F278080B4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CD1BB5-0AC5-47FE-A292-7F278080B4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CD1BB5-0AC5-47FE-A292-7F278080B4F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

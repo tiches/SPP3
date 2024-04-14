@@ -45,6 +45,7 @@
     <Compile Include="DAProcessing.cs" />
     <Compile Include="DateRequest.cs" />
     <Compile Include="Like.cs" />
+    <Compile Include="LoginModel.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="PlannedDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
