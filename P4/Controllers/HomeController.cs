@@ -1,3 +1,4 @@
+using DatingAppLibrary;
 using Microsoft.AspNetCore.Mvc;
 using P4.Models;
 using System.Diagnostics;
@@ -18,7 +19,31 @@ namespace P4.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public ActionResult UserHome()
+        {
+            // Retrieve UserID from session
+            int? userId = HttpContext.Session.GetInt32("UserID");
+
+            if (userId != null)
+            {
+                // Create an instance of DAProcessing
+                DAProcessing dbProcess = new DAProcessing();
+
+                // Call the method to get UserProfile by UserID
+                UserProfile userProfile = dbProcess.GetUserProfileByID((int)userId);
+
+                // Pass the userProfile object to the view
+                return View(userProfile);
+            }
+            else
+            {
+                // Handle the case where UserID is not found in session
+                // Redirect to login page or show an error message
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+            public IActionResult Privacy()
         {
             return View();
         }
@@ -30,3 +55,4 @@ namespace P4.Controllers
         }
     }
 }
+

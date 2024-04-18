@@ -27,9 +27,9 @@ namespace P4.Controllers
 
                 if (userId > 0)
                 {
-                    
-                    Session["UserID"] = userId;
-                    return RedirectToAction("Index", "DatingAppHome"); // Redirect to home page
+                    HttpContext.Session.SetInt32("UserID", userId);
+                    // Session["UserID"] = userId;
+                    return RedirectToAction("UserHome", "Home"); // Redirect to home page
                 }
                 else
                 {
