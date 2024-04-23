@@ -1,0 +1,40 @@
+﻿@model P4.Models.AccountCreateModel
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <form method="post">
+        <div class="container mt-5">
+            <h2>Create User Account</h2>
+            <div class="form-group">
+                <label for="txtUsername">Username:</label>
+                <input id="txtUsername" name="CreateUsername" asp-for="CreateUsername" class="form-control" />
+                <span asp-validation-for="CreateUsername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtPassword">Password:</label>
+                <input id="txtPassword" name="CreatePassword" asp-for="CreatePassword" class="form-control" />
+                <span asp-validation-for="CreatePassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtFullname">Full Name:</label>
+                <input id="txtFullName" name="CreateFullName" asp-for="CreateFullName" class="form-control" />
+                <span asp-validation-for="CreateFullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtEmail">Email:</label>
+                <input id="txtEmail" name="CreateEmail" asp-for="CreateEmail" class="form-control" />
+                <span asp-validation-for="CreateEmail" class="text-danger"></span>
+            </div>
+            <button id="btnCreateAccount" type="submit" class="btn btn-primary" asp-controller="AccountCreate" asp-action="AccountCreate">Submit</button>
+            <label ID="lblErrorMsg" runat="server" Text="" Visible="False"></label> </div>
+    </form>
+</body>
+</html>
