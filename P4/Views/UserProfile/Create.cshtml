@@ -1,0 +1,116 @@
+﻿@using DatingAppLibrary
+
+@model UserProfile
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Profile</h2>
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="ProfilePhotoUrl">Profile Photo URL:</label>
+                <input asp-for="ProfilePhotoURL" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Name">Name:</label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Address">Address:</label>
+                <input asp-for="Address" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="City">City:</label>
+                <input asp-for="City" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="State">State:</label>
+                <input asp-for="State" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Phone">Phone:</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Occupation">Occupation:</label>
+                <input asp-for="Occupation" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Age">Age:</label>
+                <input asp-for="Age" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Height">Height (cm):</label>
+                <input asp-for="Height" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Weight">Weight:</label>
+                <input asp-for="Weight" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="CommitmentType">Commitment Type:</label>
+                <select asp-for="CommitmentType" class="form-control">
+                    <option value="Friends">Friends</option>
+                    <option value="Dating">Dating</option>
+                    <option value="Long Term">Long Term</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Interests">Interests:</label>
+                <input asp-for="Interests" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Likes">Likes:</label>
+                <input asp-for="Likes" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Dislikes">Dislikes:</label>
+                <input asp-for="Dislikes" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="FavoriteRestaurants">Favorite Restaurants:</label>
+                <input asp-for="FavoriteRestaurants" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="FavoriteMovies">Favorite Movies:</label>
+                <input asp-for="FavoriteMovies" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="FavoriteBooks">Favorite Books:</label>
+                <input asp-for="FavoriteBooks" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="FavoriteQuotes">Favorite Quotes:</label>
+                <input asp-for="FavoriteQuotes" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Goals">Goals:</label>
+                <input asp-for="Goals" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

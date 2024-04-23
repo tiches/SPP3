@@ -133,7 +133,7 @@ namespace DatingAppLibrary
 
 
         }
-        public int creatUserProfile(UserProfile userProfile, int userID)
+        public int createUserProfile(UserProfile userProfile, int userID)
         {
             int profileid = -1;
 

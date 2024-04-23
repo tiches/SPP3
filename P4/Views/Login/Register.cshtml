@@ -1,0 +1,34 @@
+﻿@model RegisterModel
+
+<h2>Register</h2>
+
+@using (Html.BeginForm("Register", "Login", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <div>
+        @Html.LabelFor(model => model.Username)
+        @Html.TextBoxFor(model => model.Username)
+        @Html.ValidationMessageFor(model => model.Username)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password)
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.ConfirmPassword)
+        @Html.PasswordFor(model => model.ConfirmPassword)
+        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.FullName)
+        @Html.TextBoxFor(model => model.FullName)
+        @Html.ValidationMessageFor(model => model.FullName)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBoxFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    <button type="submit">Register</button>
+}

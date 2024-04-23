@@ -81,7 +81,7 @@ namespace SPP3
 
             
 
-            profileid = dbProcess.creatUserProfile(userprof, userid);
+            profileid = dbProcess.createUserProfile(userprof, userid);
 
             Session["ProfileID"] = profileid;
             Response.Redirect("DatingAppHome.aspx");
