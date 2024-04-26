@@ -10,7 +10,9 @@ namespace DatingAppLibrary
     {
         public int DateID { get; set; }
         public int MatchID { get; set; }
-        public DateTime DateDateTime { get; set; }
+        public string Time { get; set; }
         public string Description { get; set; }
+        public int userIDone { get; set; }
+        public int userIDtwo { get; set; }
     }
 }

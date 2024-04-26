@@ -1,0 +1,95 @@
+﻿
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>View Matches</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .match-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+            .match-item img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+        .match-delete-btn {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button ID="btnBack" runat="server" CssClass="btn btn-primary" OnClick="location.href='@Url.Action("Index", "ViewDates")'">Back to Dates View</button>
+            </div>
+        </div>
+        <div class="container">
+            <h2>Accepted Dates</h2>
+            <div id="matchesContainer" runat="server">
+                @foreach (var profile in Model)
+                {
+                    <form asp-controller="ViewProfile" asp-action="Index" method="post">
+                        <div class="card border-primary mb-3" style="max-width: 30rem; padding-bottom:40px">
+                            <input type="hidden" name="userID" value="@profile.UserID" />
+                            <div class="row">
+                                <div class="row">
+                                    <img src="@profile.ProfilePhotoURL" class="img-fluid">
+                                </div>
+                                <div class="row">
+                                    <div class="card-header">@profile.Name</div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.Description</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.City</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.State</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.Age</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.CommitmentType</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.Interests</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.Likes</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.Height</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.Phone</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.FavoriteMovies</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">@profile.FavoriteRestaurants</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <p class="card-text">@profile.Goals</p>
+                                    </div>
+                                    <button id="btnPlanDate" type="submit" class="btn btn-primary" asp-controller="Dates" asp-action="PlanDate">Plan Date</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+</body>
+</html>

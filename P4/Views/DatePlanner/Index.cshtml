@@ -1,0 +1,33 @@
+﻿@model P4.Models.PlannedDateModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Date</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <form method="post">
+        <div class="container mt-5">
+            <h2>Date Plans:</h2>
+            <div class="form-group">
+                <label for="txtTime">Time:</label>
+                <input id="txtTime" name="Time" asp-for="Time" class="form-control" />
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtDescription">Description:</label>
+                <input id="txtDescription" name="Description" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" asp-controller="Login" asp-action="Login">Save Plans</button>
+            <div style="padding-top:20px">
+  
+            </div>
+        </div>
+    </form>
+</body>
+</html>

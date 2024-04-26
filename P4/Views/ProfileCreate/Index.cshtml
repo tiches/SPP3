@@ -1,0 +1,144 @@
+﻿@model P4.Models.ProfileModel
+@Html.ValidationSummary(true)
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Create Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server" style="padding-bottom:100px" method="post">
+        <div class="container">
+            <h2>Create Profile</h2>
+
+            <div class="form-group">
+                <label for="txtProfilePhoto">Profile Photo URL:</label>
+                <input id="txtProfilePhoto" name="PhotoURL" asp-for="PhotoURL" class="form-control" />
+                <span asp-validation-for="PhotoURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtName">Name:</label>
+                <input ID="txtName" name="Name" asp-for="Name" runat=" server" CssClass="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtAddress">Address:</label>
+                <input ID="txtAddress" name="Address" asp-for="Address" runat=" server" CssClass="form-control">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="txtCity">City:</label>
+                <input ID="txtCity" name="City" asp-for="City" runat="server" CssClass="form-control">
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtState">State:</label>
+                <input ID="txtState" name="State" asp-for="State" runat="server" CssClass="form-control">
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtPhone">Phone:</label>
+                <input ID="txtPhone" name="Phone" asp-for="Phone" runat="server" CssClass="form-control">
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtOccupation">Occupation:</label>
+                <input ID="txtOccupation" name="Occupation" asp-for="Occupation" runat="server" CssClass="form-control">
+                <span asp-validation-for="Occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtAge">Age:</label>
+                <input ID="txtAge" name="Age" asp-for="Age" runat="server" CssClass="form-control">
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtHeight">Height (cm):</label>
+                <input ID="txtHeight" name="Height" asp-for="Height" runat="server" CssClass="form-control">
+                <span asp-validation-for="Height" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label for="txtWeight">Weight:</label>
+                <input ID="txtWeight" name="Weight" asp-for="Weight" runat="server" CssClass="form-control">
+                <span asp-validation-for="Weight" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label for="ddlCommitmentType">Commitment Type:</label>
+                <select class="form-control" name="CommitmentType" asp-for="CommitmentType" id="StudentGender" >
+                    <option>Friends</option>
+                    <option>Dating</option>
+                    <option>Long Term</option>
+                </select>
+                <span asp-validation-for="CommitmentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtInterests">Interests:</label>
+                <input ID="txtInterests" name="Interests" asp-for="Interests" runat="server" CssClass="form-control">
+                <span asp-validation-for="Interests" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtLikes">Likes:</label>
+                <input ID="txtLikes" name="Likes" asp-for="Likes" runat="server" CssClass="form-control">
+                <span asp-validation-for="Likes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtDisLikes">Dislikes:</label>
+                <input ID="txtDislikes" name="Dislikes" asp-for="Dislikes" runat="server" CssClass="form-control">
+                <span asp-validation-for="Dislikes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtFavoriteRestaurants">Favorite Restaurants:</label>
+                <input ID="txtFavoriteRestaurants" name="FavRestaurants" asp-for="FavRestaurants" runat="server" CssClass="form-control">
+                <span asp-validation-for="FavRestaurants" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtFavoriteMovies">Favorite Movies:</label>
+                <input ID="txtFavoriteMovies" name="FavMovies" asp-for="FavMovies" runat="server" CssClass="form-control">
+                <span asp-validation-for="FavMovies" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="txtFavoriteBooks">Favorite Books:</label>
+                <input ID="txtFavoriteBooks" name="FavBooks" asp-for="FavBooks" runat="server" CssClass="form-control">
+                <span asp-validation-for="FavBooks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtFavoriteQuotes">Favorite Quotes:</label>
+                <input ID="txtFavoriteQuotes" name="FavQuotes" asp-for="FavQuotes" runat="server" CssClass="form-control">
+                <span asp-validation-for="FavQuotes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtGoals">Goals:</label>
+                <input ID="txtGoals" name="Goals" asp-for="Goals" runat="server" CssClass="form-control">
+                <span asp-validation-for="Goals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="txtDescription">Description:</label>
+                <input ID="txtDescription" name="Description" asp-for="Description" runat="server" CssClass="form-control">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+        </div>
+        <button id="btnCreateProfile" style="padding-bottom:20px" type="submit" class="btn btn-primary" asp-controller="ProfileCreate" asp-action="ProfileCreate">Submit</button>
+        
+    </form>
+</body>
+</html>

@@ -27,7 +27,7 @@ namespace SPP3
             checkUser.Username = txtUsername.Text;
 
            
-           userid= dbProcess.UserLogin(checkUser);
+           userid= dbProcess.UserLoginID(checkUser);
 
            // lblErrorMsg.Text = userid.ToString();
 

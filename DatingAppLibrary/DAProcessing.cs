@@ -1,19 +1,52 @@
 ﻿using System;
+using System.Web;
+using System.Linq;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utilities;
+using System.Security.Cryptography;
+using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace DatingAppLibrary
 {
     public class DAProcessing
     {
+        private Byte[] key = { 250, 101, 18, 76, 45, 135, 207, 118, 4, 171, 3, 168, 202, 241, 37, 199 };
+
+        private Byte[] vector = { 146, 64, 191, 111, 23, 3, 113, 119, 231, 121, 252, 112, 79, 32, 114, 156 };
         public int createUser(UserAccount user)
         {
+
             int userid = -1;
+
+            string encryptedPassword;
+
+            UTF8Encoding encoder = new UTF8Encoding();
+            Byte[] textBytes;
+
+            textBytes = encoder.GetBytes(user.Password);
+
+            RijndaelManaged rmEncryption = new RijndaelManaged();
+            MemoryStream myMemoryStream = new MemoryStream();
+            CryptoStream myEncryptionStream = new CryptoStream(myMemoryStream, rmEncryption.CreateEncryptor(key, vector), CryptoStreamMode.Write);
+
+            myEncryptionStream.Write(textBytes, 0, textBytes.Length);
+            myEncryptionStream.FlushFinalBlock();
+
+            myMemoryStream.Position = 0;
+            Byte[] encryptedBytes = new Byte[myMemoryStream.Length];
+            myMemoryStream.Read(encryptedBytes, 0, encryptedBytes.Length);
+
+            myEncryptionStream.Close();
+            myMemoryStream.Close();
+
+            encryptedPassword = Convert.ToBase64String(encryptedBytes);
+
             DBConnect objDB = new DBConnect();
             SqlCommand objCommand = new SqlCommand();
 
@@ -28,7 +61,7 @@ namespace DatingAppLibrary
 
             // Adding user account data to command
             objCommand.Parameters.AddWithValue("@Username", user.Username);
-            objCommand.Parameters.AddWithValue("@Password", user.Password);
+            objCommand.Parameters.AddWithValue("@Password", encryptedPassword);
             objCommand.Parameters.AddWithValue("@Fullname", user.FullName);
             objCommand.Parameters.AddWithValue("@Email", user.Email);
 
@@ -48,7 +81,7 @@ namespace DatingAppLibrary
 
             return userid;
         }
-        public int UserLogin(UserAccount user)
+        public int UserLoginID(UserAccount user)
         {
             int userid = -1;
 
@@ -73,10 +106,50 @@ namespace DatingAppLibrary
             {
                 userid = Convert.ToInt32(objCommand.Parameters["@UserID"].Value);
             }
-
-
-
             return userid;
+        }
+        public string UserLoginPassword(UserAccount user)
+        {
+            string decryptedpassword = "";
+
+            DBConnect objDB1 = new DBConnect();
+            SqlCommand objCommand1 = new SqlCommand();
+
+            objCommand1.CommandType = CommandType.StoredProcedure;
+            objCommand1.CommandText = "FindUserPassword";
+
+            objCommand1.Parameters.AddWithValue("@username", user.Username);
+
+            DataSet PasswordDS = objDB1.GetDataSetUsingCmdObj(objCommand1);
+            DataTable PasswordDT = PasswordDS.Tables[0];
+            if (PasswordDT.Rows.Count > 0)
+            {
+                DataRow PasswordDR = PasswordDT.Rows[0];
+
+                user.Password = PasswordDR["Password"].ToString();
+
+                Byte[] encryptedPasswordBytes = Convert.FromBase64String(user.Password);
+                Byte[] textBytes;
+
+                UTF8Encoding encoder = new UTF8Encoding();
+
+                RijndaelManaged rmEncryption = new RijndaelManaged();
+                MemoryStream myMemoryStream = new MemoryStream();
+                CryptoStream myDecryptionStream = new CryptoStream(myMemoryStream, rmEncryption.CreateDecryptor(key, vector), CryptoStreamMode.Write);
+
+                myDecryptionStream.Write(encryptedPasswordBytes, 0, encryptedPasswordBytes.Length);
+                myDecryptionStream.FlushFinalBlock();
+
+                myMemoryStream.Position = 0;
+                textBytes = new Byte[myMemoryStream.Length];
+                myMemoryStream.Read(textBytes, 0, textBytes.Length);
+
+                myDecryptionStream.Close();
+                myMemoryStream.Close();
+
+                decryptedpassword = encoder.GetString(textBytes);
+            }
+            return decryptedpassword;
         }
 
         public UserAccount getUserByID(int userid)
@@ -416,6 +489,33 @@ namespace DatingAppLibrary
             return SentLikes;
         }
 
+        public int FindLikeID(int userID, int receiverID)
+        {
+            int LikeID = 0;
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindLikeID";
+            objCommand.Parameters.AddWithValue("@senderID", userID);
+            objCommand.Parameters.AddWithValue("@receiverID", receiverID);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    DataRow Row = myDS.Tables[0].Rows[0];
+
+                    LikeID = (int)Row["LikeID"];
+
+                }
+            }
+            return LikeID;
+        }
+
         public List<Like> GetReceivedLikes(int userID)
         {
             List<Like> receivedLikes = new List<Like>();
@@ -444,6 +544,32 @@ namespace DatingAppLibrary
                 }
             }
             return receivedLikes;
+        }
+        public int FindMatchID(int userID, int userIDtwo)
+        {
+            int MatchID = 0;
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindMatchID";
+            objCommand.Parameters.AddWithValue("@userIdOne", userID);
+            objCommand.Parameters.AddWithValue("@userIdTwo", userIDtwo);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    DataRow Row = myDS.Tables[0].Rows[0];
+
+                    MatchID = (int)Row["MatchID"];
+
+                }
+            }
+            return MatchID;
         }
 
 
@@ -656,28 +782,192 @@ namespace DatingAppLibrary
 
             objDB.DoUpdateUsingCmdObj(objCommand);
         }
-        public Match GetMatchByID(int matchID)
+
+        public void SendDateRequest(int SenderID, int ReceiverID)
         {
-            Match match = new Match();
             DBConnect objDB = new DBConnect();
             SqlCommand objCommand = new SqlCommand();
 
             objCommand.CommandType = CommandType.StoredProcedure;
-            objCommand.CommandText = "GetMatchByID";
-            objCommand.Parameters.AddWithValue("@MatchID", matchID);
+            objCommand.CommandText = "CreateDateRequest";
+            objCommand.Parameters.AddWithValue("@SenderUserID", SenderID);
+            objCommand.Parameters.AddWithValue("@RecipientUserID", ReceiverID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+        }
+
+        public List<DateRequest> FindDateRequests(int userID)
+        {
+            List<DateRequest> DateRequests = new List<DateRequest>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindDateRequests";
+            objCommand.Parameters.AddWithValue("@userID", userID);
+
+
             DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
 
-            if (myDS.Tables.Count > 0 && myDS.Tables[0].Rows.Count > 0)
+            if (myDS.Tables.Count > 0)
             {
-                // Get the first row from the DataSet
-                DataRow row = myDS.Tables[0].Rows[0];
-                match.User1ID = (int)row["User1ID"];
-                match.User2ID = (int)row["User2ID"];
-                match.MatchID = (int)row["MatchID"];
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    DateRequest DateRequest1 = new DateRequest();
 
+                    // Populate the UserProfile object from the DataRow
+                    DateRequest1.RequestID = (int)row["RequestID"];
+                    DateRequest1.SenderUserID = (int)row["SenderUserID"];
+                    DateRequest1.ReceiverUserID = (int)row["RecipientUserID"];
+                    DateRequest1.Status = row["Status"].ToString();
+
+                    DateRequests.Add(DateRequest1);
+                }
             }
-            return match;
+            return DateRequests;
+        }
+
+        public int FindRequestID(int userIDSender, int userIDReceiver)
+        {
+            int RequestID = 0;
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindRequestID";
+            objCommand.Parameters.AddWithValue("@userIDone", userIDSender);
+            objCommand.Parameters.AddWithValue("@userIDtwo", userIDReceiver);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    DataRow Row = myDS.Tables[0].Rows[0];
+
+                    RequestID = (int)Row["RequestID"];
+
+                }
+            }
+            return RequestID;
+
+
+        }
+
+        public void AcceptDate(int RequestID, int userIDSender, int userIDReceiver)
+        {
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "AcceptDate";
+            objCommand.Parameters.AddWithValue("@requestID", RequestID);
+            objCommand.Parameters.AddWithValue("@userIDone", userIDSender);
+            objCommand.Parameters.AddWithValue("@userIDtwo", userIDReceiver);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+
+
+        }
+        public void DenyDate(int RequestID)
+        {
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "DenyDate";
+            objCommand.Parameters.AddWithValue("@requestID", RequestID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+
+
+        }
+
+        public void IgnoreDate(int RequestID)
+        {
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "IgnoreDate";
+            objCommand.Parameters.AddWithValue("@requestID", RequestID);
+
+            objDB.DoUpdateUsingCmdObj(objCommand);
+
+
+        }
+
+        public List<PlannedDate> FindDates(int userID)
+        {
+            List<PlannedDate> Dates = new List<PlannedDate>();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindDates";
+            objCommand.Parameters.AddWithValue("@userID", userID);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    PlannedDate Date = new PlannedDate();
+
+                    // Populate the UserProfile object from the DataRow
+                    Date.DateID = (int)row["DateID"];
+                    Date.userIDone = (int)row["UserIDone"];
+                    Date.userIDtwo = (int)row["UserIDtwo"];
+
+                    Dates.Add(Date);
+                }
+            }
+            return Dates;
+
+
+        }
+
+        public PlannedDate FindDate(int userID, int userIDtwo)
+        {
+            PlannedDate Date = new PlannedDate();
+
+            DBConnect objDB = new DBConnect();
+            SqlCommand objCommand = new SqlCommand();
+
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.CommandText = "FindDate";
+            objCommand.Parameters.AddWithValue("@userIDone", userID);
+            objCommand.Parameters.AddWithValue("@userIDtwo", userIDtwo);
+
+            DataSet myDS = objDB.GetDataSetUsingCmdObj(objCommand);
+
+            if (myDS.Tables.Count > 0)
+            {
+                foreach (DataRow row in myDS.Tables[0].Rows)
+                {
+                    // Populate the UserProfile object from the DataRow
+                    Date.DateID = (int)row["DateID"];
+                    Date.userIDone = (int)row["UserIDone"];
+                    Date.userIDtwo = (int)row["UserIDtwo"];
+                    if(row["EventDateTime"].ToString() != null && row["Description"].ToString() != null)
+                    {
+                        Date.Time = row["EventDateTime"].ToString();
+                        Date.Description = row["Description"].ToString();
+                    }
+
+                }
+            }
+            return Date;
+
+
         }
     }
-}
-
+    }

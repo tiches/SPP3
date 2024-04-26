@@ -14,15 +14,20 @@
             <h2>User Login</h2>
             <div class="form-group">
                 <label for="txtUsername">Username:</label>
-                <input id="txtUsername" asp-for="Username" class="form-control" />
+                <input id="txtUsername" name="Username"asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="txtPassword">Password:</label>
-                <input id="txtPassword" asp-for="Password" type="password" class="form-control" />
+                <input id="txtPassword" name="Password" asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" asp-controller="Login" asp-action="Login">Login</button>
+            <div style="padding-top:20px">
+                <button id="btnCreateCookie" type="submit" class="btn btn-primary" asp-controller="Login" asp-action="CreateCookie">Create Login Cookie</button>
+                <br />
+                <button id="btnDeleteCookie" type="button" class="btn btn-primary" onclick="location.href='@Url.Action("DeleteCookie", "Login")'">Delete Login Cookie</button>
+            </div>
         </div>
     </form> 
 </body>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>View Likes</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Add your custom CSS styles here */
+        .like-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <h1>View Likes</h1>
+            <div id="likesContainer" runat="server">
+                @foreach (var profile in Model)
+                {
+                    <form asp-controller="ViewProfile" asp-action="Index" method="post">
+                        <div class="card border-primary mb-3" style="max-width: 20rem;">
+                            <input type="hidden" name="userID" value="@profile.UserID" />
+                            <div name="userID" class="col col-sm-2">@profile.UserID</div>
+                            <div class="col col-md-6">
+                                <img src=@profile.ProfilePhotoURL class="img-fluid">
+                            </div>
+                            <div class="card-header">@profile.Name</div>
+                            <div class="card-body">
+                                <p class="card-text">@profile.Description</p>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">@profile.City</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">@profile.Age</p>
+                            </div>
+                            <button id="btnDelete" type="submit" class="btn btn-primary" asp-controller="ReceivedLikes" asp-action="DeleteLike">Delete</button>
+                            <button id="btnMatch" type="submit" class="btn btn-primary" asp-controller="ReceivedLikes" asp-action="Match">Match</button>
+
+                        </div>
+                    </form>
+                }
+            </div>
+            <button ID="btnBack" runat="server" CssClass="btn btn-primary" OnClick="location.href='@Url.Action("Index", "ViewLikes")'" >Back</button>
+        </div>
+</body>
+</html>

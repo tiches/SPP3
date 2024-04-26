@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Browse Profiles</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .card {
+            width: 300px; /* Fixed width for each card */
+            margin: 10px; /* Margin between cards */
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 200px; /* Fixed height for the profile image */
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <!-- Back button and search links -->
+            <div class="row mb-3">
+                <div class="col">
+                    <a href="@Url.Action("UserHome", "Home")" class="btn btn-secondary">Back</a>
+                </div>
+                <div class="col text-right">
+                    <!-- search links here -->
+                    <div class="form-group">
+                        <label for="ddlSearchCriteria">Search By:</label>
+                        <select class="form-control" id="StudentGender" name="CommitmentType">
+                            <option>Age</option>
+                            <option>City</option>
+                            <option>Interests</option>
+                        </select>
+                    </div>
+                    <input ID="txtSearch" runat="server" CssClass="form-control mr-2" />
+                    <button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" />
+                </div>
+            </div>
+
+            <!-- Profile cards container -->
+            <div id="profileContainer" name= "profileContainer" runat="server" class="row"></div>
+            @foreach (var profile in Model)
+            {
+                <form asp-controller="ViewProfile" asp-action="Index" method="post">
+                    <div class="card border-primary mb-3"  style="max-width: 20rem;">
+                        <input type="hidden" name="userID" value="@profile.UserID" />
+                        <div class="col col-md-6">
+                            <img src=@profile.ProfilePhotoURL class="img-fluid">
+                        </div>
+                        <div class="card-header">@profile.Name</div>
+                        <div class="card-body">
+                            <p class="card-text">@profile.Description</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text">@profile.Age</p>
+                        </div>
+                        <button id="btnViewProfile" type="submit" class="btn btn-primary" asp-controller="BrowseProfiles" asp-action="ViewProfile">View Profile</button>
+                        
+                    </div>
+                </form>
+            }
+        </div>
+    </form>
+</body>
+</html>
