@@ -1,0 +1,99 @@
+﻿@using DatingAppLibrary
+
+@model UserProfile
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Profile</title>
+    <style>
+        body {
+            background-color: #ffe6f2; /* Light pink background */
+            color: #4d4d4d; /* Dark gray text */
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #ff4d4d; /* Red heading */
+        }
+
+        .like-button {
+            background-color: #ff4d4d; /* Red background */
+            color: #fff; /* White text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .like-button:hover {
+                background-color: #ff3333; /* Darker red on hover */
+            }
+
+        .profile-container {
+            background-color: #fff; /* White container */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center align content */
+        }
+
+            .profile-container h2 {
+                color: #ff4d4d; /* Red subheading */
+            }
+
+            .profile-container p {
+                margin-bottom: 10px;
+            }
+
+            .profile-container img {
+                max-width: 80%; /* Make the image 80% of the container width */
+                border-radius: 5px;
+                margin-bottom: 20px; /* Increase margin for spacing */
+            }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <!-- Display the image before other information -->
+        <img src="@Model.ProfilePhotoURL" alt="Profile Image">
+        <div>
+            <h2>@Model.Name</h2>
+            <p>Description: @Model.Description</p>
+            <p>Age: @Model.Age</p>
+            <p>City: @Model.City</p>
+            <p>State: @Model.State</p>
+            
+            <p>Occupation: @Model.Occupation</p>
+            <p>Height: @Model.Height</p>
+            <p>Weight: @Model.Weight</p>
+            <p>Interests: @Model.Interests</p>
+            <p>Likes: @Model.Likes</p>
+            <p>Dislikes: @Model.Dislikes</p>
+            <p>Favorite Restaurants: @Model.FavoriteRestaurants</p>
+            <p>Favorite Movies: @Model.FavoriteMovies</p>
+            <p>Favorite Books: @Model.FavoriteBooks</p>
+            <p>Favorite Quotes: @Model.FavoriteQuotes</p>
+            <p>Goals: @Model.Goals</p>
+            <p>Commitment Type: @Model.CommitmentType</p>
+            <br />
+
+            @if (ViewBag.LikeSent != null)
+            {
+                <p style="color: green;">Like sent successfully!</p>
+            }
+            <br />  
+
+            <form method="post" action="@Url.Action("SendLike", "BrowseProfiles")">
+                <input type="hidden" name="userId" value="@Model.UserID" />
+                <button type="submit" class="like-button">Send Like</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

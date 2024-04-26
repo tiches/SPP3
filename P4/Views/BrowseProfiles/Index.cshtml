@@ -1,0 +1,62 @@
+﻿﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Browse Profiles</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .card {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col">
+                    <a href="@Url.Action("UserHome", "Home")" class="btn btn-secondary">Back</a>
+                </div>
+                <div class="col text-right">
+                    <div class="form-group">
+                        <label for="ddlSearchCriteria">Search By:</label>
+                        <select class="form-control" id="StudentGender" name="CommitmentType">
+                            <option>Age</option>
+                            <option>City</option>
+                            <option>Interests</option>
+                        </select>
+                    </div>
+                    <input ID="txtSearch" runat="server" CssClass="form-control mr-2" />
+                    <button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" />
+                </div>
+            </div>
+
+            <div id="profileContainer" name="profileContainer" runat="server" class="row row-cols-1 row-cols-md-4">
+                @foreach (var profile in Model)
+                {
+                    <div class="col mb-4">
+                        <div class="card border-primary h-100">
+                            <img src="@profile.ProfilePhotoURL" class="card-img-top img-fluid" alt="Profile Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@profile.Name</h5>
+                                <p class="card-text">@profile.Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">@profile.Age</p>
+                                <!-- Add View Profile button -->
+                                <a href="@Url.Action("ViewProfile", "BrowseProfiles", new { userId = profile.UserID })" class="btn btn-primary">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+</body>
+</html>
